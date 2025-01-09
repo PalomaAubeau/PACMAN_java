@@ -33,8 +33,9 @@ public class GhostBlock extends Block {
    
 	
 	private void updateVelocity() { 
-		this.velocityX = direction.getDeltaX() * 8;
-		this.velocityY = direction.getDeltaY() * 8; 
+		 int speedFactor = 25;
+		this.velocityX = direction.getDeltaX() * width * speedFactor/100;
+		this.velocityY = direction.getDeltaY() * height *speedFactor/100; 
 	}
 	 
 

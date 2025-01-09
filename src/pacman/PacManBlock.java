@@ -5,6 +5,7 @@ import java.awt.*;
 public class PacManBlock extends Block {
     private Direction direction;
     private int velocityX = 0, velocityY = 0;
+  
 
     public PacManBlock(Image image, int x, int y, int size) {
         super(image, x, y, size, size);
@@ -15,6 +16,7 @@ public class PacManBlock extends Block {
         velocityX = direction.getDeltaX() * 8;
         velocityY = direction.getDeltaY() * 8;
     }
+    
 
     public void move() {
         x += velocityX;

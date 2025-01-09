@@ -22,7 +22,7 @@ public class GameManager extends JPanel implements ActionListener, KeyListener {
     private PacManBlock pacman;
 
     private final Timer gameLoop;
-    private final Random random = new Random();
+  
 
     private int score = 0;
     private int lives = 3;
@@ -119,10 +119,10 @@ public class GameManager extends JPanel implements ActionListener, KeyListener {
  
 
     private void draw(Graphics g) {
-        for (Block wall : walls) wall.draw(g);
-        for (Block food : foods) food.draw(g);
-        for (GhostBlock ghost : ghosts) ghost.draw(g);
-        pacman.draw(g);
+		
+		  for (Block wall : walls) wall.draw(g); for (Block food : foods) food.draw(g);
+		  for (GhostBlock ghost : ghosts) ghost.draw(g); pacman.draw(g);
+		 
 
         // Display score and lives
         g.setColor(Color.WHITE);
@@ -210,6 +210,7 @@ public class GameManager extends JPanel implements ActionListener, KeyListener {
                a.y < b.y + b.height &&
                a.y + a.height > b.y;
     }
+    
     
     
     @Override
