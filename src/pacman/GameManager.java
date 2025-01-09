@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashSet;
-import java.util.Random;
+
 
 public class GameManager extends JPanel implements ActionListener, KeyListener {
     private final int rowCount = 21;
@@ -156,25 +156,22 @@ public class GameManager extends JPanel implements ActionListener, KeyListener {
            }
        }
        
-       //check ghost collision
-       for(GhostBlock ghost : ghosts ) {
-    	   if (collision(pacman, ghost)) {
-               lives--;
-               if (lives == 0) {
-                   gameOver = true;
-               }
-               pacman.reset();
-               for (GhostBlock g : ghosts) {
-                   g.reset(); 
-               }
-               break;
-           }
-       }
-
        	//GHOST
 		  for (GhostBlock ghost : ghosts) { 
 			  ghost.move();
-			  
+			// action with pacman collisions
+			  if (collision(pacman, ghost)) {
+	               lives--;
+	               if (lives == 0) {
+	                   gameOver = true;
+	               }
+	               pacman.reset();
+	               for (GhostBlock g : ghosts) {
+	                   g.reset(); 
+	               }
+	               break;
+	           }
+			// at row 9, ghost shouldn't be stuck in x axe.
 			  if (ghost.y == boxSize * 9 && ghost.getDirection() != Direction.UP && ghost.getDirection() != Direction.DOWN) {
 				    ghost.updateDirection(Direction.UP);
 				}
@@ -183,7 +180,7 @@ public class GameManager extends JPanel implements ActionListener, KeyListener {
 		            if (collision(ghost, wall) || ghost.x <= 0 || ghost.x + ghost.width >= boardWidth) {
 		                ghost.x -= ghost.getVelocityX();
 		                ghost.y -= ghost.getVelocityY();
-		                ghost.updateDirectionRandomly();
+		                ghost.updateDirection(null);
 		                break;
 		            }
 		        }
